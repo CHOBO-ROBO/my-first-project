@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class OutOfBounds : MonoBehaviour
 {
-    private GameObject player;
+    public GameObject player;
     private Vector3 lastPlayerPosition;
 
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         lastPlayerPosition = player.transform.position;
     }
 
@@ -19,11 +18,13 @@ public class OutOfBounds : MonoBehaviour
         if (other.tag == "Checkpoint")
         {
             lastPlayerPosition = other.transform.position;
+            Debug.Log("Checkpoint hit");
         }
 
         if (other.tag == "OutOfBounds")
         {
             Debug.Log("player went out of bounds");
+            Debug.Log(lastPlayerPosition);
             // Reset player force and rotation
             var rb = player.GetComponent<Rigidbody>();
             rb.velocity = new Vector3(0, 0, 0);
